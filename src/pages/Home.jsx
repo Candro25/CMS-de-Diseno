@@ -1,10 +1,31 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
+
 
 export default function Home(){
-    const [articulos, setArticulos] = useState([]);
+    const [articulos, setArticulos] = useState(() => {
+        // Recupera los artículos del localStorage al cargar la página y así no se pierden al recargarla 
+        const articulosGuardados = localStorage.getItem('articulos');
+        if (articulosGuardados !== null){
+            if (articulosGuardados !== null){
+                try{
+                    return JSON.parse(articulosGuardados);
+                } catch (error){
+                    return [];
+                }
+            }
+            return[];
+        }
+            
+    });
+
     const [titulo, setTitulo] = useState('');
     const [categoria, setCategoria] = useState('');
     const [Ideditar, setIdeditar] = useState(null);
+
+    useEffect(() => {
+        const articulosString = JSON.stringify(articulos);
+        localStorage.setItem('articulos', articulosString); // guarda el array de articulos en localStorage
+    }, [articulos]);
 
     const agregarArticulo = (e) =>{
         e.preventDefault(); // que no se recargue la página al enviar el formulario
