@@ -5,18 +5,15 @@ export default function Navbar() {
     return (
         <nav className= "navbar navbar-dark bg-dark navbar-expand-lg">
         <div className="container">
-            <Link className="navbar-brand text-white" to="/Home">
+            <Link className="navbar-brand text-white" to="/">
                 ANGLAIA BLOG
             </Link>
             <div className= "navbar-nav">
-            <Link className="nav-link text-white" to="/Home">
-                Inicio
+            <Link className="nav-link text-white" to="/">
+                INICIO
             </Link>
-            <Link className="nav-link text-white" to="/About">
-                Acerca de
-            </Link>
-            <Link className="nav-link text-white" to="/Contact">
-                Contacto
+            <Link className="nav-link text-white" to="/Crear">
+                SUBIR BLOG
             </Link>
             </div>
         </div>
