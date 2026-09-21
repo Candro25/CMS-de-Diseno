@@ -1,12 +1,13 @@
 import {useState, useContext,useEffect} from "react";
 import { BlogContext } from "../context/BlogContext.jsx";
-import {navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-export default function Crear() {
+export default function Crear() {    
     const [titulo, setTitulo] = useState('');
     const [categoria, setCategoria] = useState('');
-    const { agregarArticulo, editarArticulo, articuloAEditar } = useContext(BlogContext);
+    const { agregarArticulo, editarArticulo, articuloAEditar,setArticuloAEditar } = useContext(BlogContext);
     
+    const navigate = useNavigate();
     useEffect(() => {
         if (articuloAEditar) {
             setTitulo(articuloAEditar.titulo);
@@ -33,11 +34,11 @@ export default function Crear() {
         setTitulo('');
         setCategoria('');
         setArticuloAEditar(null); // Limpiar el estado de edición después de guardar
-        navigate('/'); // Redirigir a la página de inicio después de guardarx
+        navigate('/'); // Redirigir a la página de inicio después de guardar
     }
     return (
         <div className="container mt-4">
-            <h1>Crear un Blog</h1>
+            <h1>{articuloAEditar !== null ? "Actualiza tu Artículo" : "Crea tu Artículo"}</h1>
             <form onSubmit={handleSubmit} className="mb-4 p-3 border rounded bg-light">
                 <h3>{articuloAEditar !== null ? "Editar Artículo" : "Agregar Nuevo Artículo"}</h3>
                 <div className="mb-3">
