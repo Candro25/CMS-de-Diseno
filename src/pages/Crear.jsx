@@ -21,6 +21,12 @@ export default function Crear() {
     function handleSubmit(e) {
         e.preventDefault();
 
+        if (titulo.trim() === '' || categoria.trim() === '') {
+            alert('Por favor, complete todos los campos antes de guardar.');
+            return;
+        }
+
+
         if (articuloAEditar !== null) {
             const articulModificado = {
                 id: articuloAEditar.id,
@@ -36,6 +42,13 @@ export default function Crear() {
         setArticuloAEditar(null); // Limpiar el estado de edición después de guardar
         navigate('/'); // Redirigir a la página de inicio después de guardar
     }
+
+    function handleCancelar() {
+        setTitulo('');
+        setCategoria('');
+        setArticuloAEditar(null); // Limpiar el estado de edición al cancelar
+        navigate('/'); // Redirigir a la página de inicio al cancelar   
+    };
     return (
         <div className="container mt-4">
             <h1>{articuloAEditar !== null ? "Actualiza tu Artículo" : "Crea tu Artículo"}</h1>
@@ -62,8 +75,12 @@ export default function Crear() {
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">{articuloAEditar !== null ? "Actualizar Artículo" : "Agregar Artículo"}</button>
+                {articuloAEditar !== null && (
+                    <button className="btn btn-secondary ms-2" onClick={handleCancelar}>
+                        Cancelar
+                    </button>
+                )}
             </form>
-
         </div>
     );
 }
